@@ -26,6 +26,10 @@ int main(int argc, char* argv[]) {
     }
 
     int PORT = std::stoi(argv[1]);
+    if (PORT <= 0 || PORT > 65535) {
+        std::cerr << "Error: port must be in range 1–65535\n";
+        return 1;
+    }
 
     // создаем сокет
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
