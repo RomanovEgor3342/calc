@@ -108,12 +108,12 @@ int main(int argc, char* argv[]) {
                     size_t pos;
 
                     // обрабатываем полученное арифметическое выражение
-                    while ((pos = recv_buffers[fd].find('\n')) != std::string::npos) {
+                    while ((pos = recv_buffers[fd].find(' ')) != std::string::npos) {
                         std::string expr = recv_buffers[fd].substr(0, pos);
                         recv_buffers[fd].erase(0, pos + 1);
                         double result = eval_expr(expr);
                         std::ostringstream oss;
-                        oss << result << "\n";
+                        oss << result << " ";
 
                         send_buffers[fd] += oss.str();
 
