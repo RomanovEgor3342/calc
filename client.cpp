@@ -68,11 +68,26 @@ int main(int argc, char* argv[]) {
         std::cerr << "Usage: " << argv[0] << " <n_nums> <connections> <server_addr> <server_port>\n";
         return 1;
     }
-
-    int N_NUMBERS = std::stoi(argv[1]);
-    int CONNECTIONS = std::stoi(argv[2]);
+    int N_NUMBERS, CONNECTIONS, SERVER_PORT;
     const char* SERVER_ADDR = argv[3];
-    int SERVER_PORT = std::stoi(argv[4]);
+    
+    N_NUMBERS = std::stoi(argv[1]);
+    if (N_NUMBERS < 1) {
+        std::cerr << "Error: <n> must be a positive integer\n";
+        return 1;
+    }
+
+    CONNECTIONS = std::stoi(argv[2]);
+    if (CONNECTIONS < 1) {
+        std::cerr << "Error: <connections> must be a positive integer\n";
+        return 1;
+    }
+
+    SERVER_PORT = std::stoi(argv[4]);
+    if (SERVER_PORT <= 0 || SERVER_PORT > 65535) {
+        std::cerr << "Error: <server_port> must be in range 1–65535\n";
+        return 1;
+    }
 
     // создаем экземпляр epoll
     int epoll_fd = epoll_create1(0);
