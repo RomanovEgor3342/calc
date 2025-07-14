@@ -40,8 +40,8 @@ std::string generate_expression(int n) {
 }
 
 std::string prepare_expression(const std::string& expr) {
-    // символ \n используется как маркер окончания выражения
-    std::string with_newline = expr + "\n";
+    // символ пробела используется как маркер окончания выражения
+    std::string with_newline = expr + " ";
     return with_newline;
 }
 
@@ -161,7 +161,7 @@ int main(int argc, char* argv[]) {
 
                 if (n > 0) {
                     recv_buffers[fd].append(buf, n);
-                    size_t pos = recv_buffers[fd].find('\n'); // находим символ окончания выражения
+                    size_t pos = recv_buffers[fd].find(' '); // находим символ окончания выражения
                     if (pos != std::string::npos) {
                         std::string response = recv_buffers[fd].substr(0, pos);
                         std::string expr = expr_map[fd];
